@@ -1,0 +1,550 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIORNII Executive Transfer — Chișinău, Moldova</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C97A; --gold-dim: #8a6f30;
+    --black: #080808; --black-soft: #0f0f0f; --black-card: #111111;
+    --white: #f5f0e8; --white-dim: #b0a898;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+  .cursor { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+  .cursor-ring { width: 32px; height: 32px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.6; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1; opacity: 0.4; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 60px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent); transition: all 0.4s ease; }
+  nav.scrolled { background: rgba(8,8,8,0.97); padding: 14px 60px; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .nav-logo { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.2em; color: var(--gold); text-decoration: none; }
+  .nav-logo span { font-size: 9px; display: block; font-weight: 400; letter-spacing: 0.5em; color: var(--white-dim); margin-top: 2px; font-family: 'Montserrat', sans-serif; }
+  .nav-right { display: flex; align-items: center; gap: 36px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--white-dim); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .lang-switcher { display: flex; gap: 3px; border: 1px solid rgba(201,168,76,0.25); padding: 4px; }
+  .lang-btn { background: none; border: none; color: var(--white-dim); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.15em; padding: 5px 10px; cursor: none; transition: all 0.3s; text-transform: uppercase; }
+  .lang-btn.active { background: var(--gold); color: var(--black); font-weight: 500; }
+  .lang-btn:hover:not(.active) { color: var(--gold); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--black); }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,168,76,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 60%); }
+  .hero-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px), repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px); }
+  .hero-content { text-align: center; position: relative; z-index: 2; padding: 0 20px; }
+  .hero-pre { font-size: 11px; letter-spacing: 0.6em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 32px; opacity: 0; animation: fadeUp 1s 0.3s ease both; }
+  .hero-title { font-family: 'Cinzel', serif; font-size: clamp(56px, 9vw, 120px); font-weight: 700; letter-spacing: 0.12em; color: var(--gold); line-height: 1; margin-bottom: 8px; opacity: 0; animation: fadeUp 1s 0.5s ease both; text-shadow: 0 0 80px rgba(201,168,76,0.2); }
+  .hero-subtitle { font-family: 'Cinzel', serif; font-size: clamp(10px, 1.5vw, 14px); letter-spacing: 0.6em; color: var(--white-dim); text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 0.7s ease both; }
+  .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.5vw, 26px); font-style: italic; font-weight: 300; color: var(--white); opacity: 0; margin-bottom: 52px; animation: fadeUp 1s 0.9s ease both; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s 1.1s ease both; }
+  .btn-gold { display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; transition: all 0.4s; position: relative; overflow: hidden; font-family: 'Montserrat', sans-serif; cursor: none; background: none; }
+  .btn-gold::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; z-index: -1; }
+  .btn-gold:hover { color: var(--black); }
+  .btn-gold:hover::before { transform: scaleX(1); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; border: 1px solid rgba(255,255,255,0.18); color: var(--white-dim); text-decoration: none; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; transition: all 0.4s; font-family: 'Montserrat', sans-serif; cursor: none; background: none; }
+  .btn-outline:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); }
+  .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 1s 1.5s ease both; }
+  .hero-scroll span { font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dim); text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: scrollAnim 2s ease infinite; }
+
+  /* CONTACT STRIP */
+  .contact-strip { background: rgba(201,168,76,0.04); border-top: 1px solid rgba(201,168,76,0.12); border-bottom: 1px solid rgba(201,168,76,0.12); padding: 18px 60px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 9px; padding: 11px 22px; border: 1px solid rgba(201,168,76,0.25); color: var(--white-dim); text-decoration: none; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.3s; font-family: 'Montserrat', sans-serif; cursor: none; background: none; position: relative; overflow: hidden; }
+  .cta-btn::before { content: ''; position: absolute; inset: 0; background: rgba(201,168,76,0.07); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; z-index: -1; }
+  .cta-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .cta-btn:hover::before { transform: scaleX(1); }
+  .cta-btn.highlight { border-color: var(--gold); color: var(--gold); }
+
+  /* SECTIONS */
+  section { position: relative; }
+  .section-header { text-align: center; margin-bottom: 80px; }
+  .section-eyebrow { font-size: 10px; letter-spacing: 0.6em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; display: block; }
+  .section-title { font-family: 'Cinzel', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 600; color: var(--white); letter-spacing: 0.08em; margin-bottom: 20px; }
+  .section-rule { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto; }
+
+  /* ABOUT */
+  #about { padding: 120px 60px; background: var(--black-soft); }
+  .about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-text p { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.8; color: var(--white-dim); margin-bottom: 24px; }
+  .about-text p strong { color: var(--gold); font-weight: 400; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.15); }
+  .stat { padding: 40px 32px; background: var(--black-card); text-align: center; transition: background 0.3s; }
+  .stat:hover { background: rgba(201,168,76,0.05); }
+  .stat-num { font-family: 'Cinzel', serif; font-size: 42px; color: var(--gold); display: block; margin-bottom: 8px; }
+  .stat-label { font-size: 10px; letter-spacing: 0.3em; color: var(--white-dim); text-transform: uppercase; }
+
+  /* SERVICES */
+  #services { padding: 120px 60px; background: var(--black); }
+  .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1); }
+  .service-card { background: var(--black-card); padding: 52px 38px; transition: all 0.4s; position: relative; overflow: hidden; }
+  .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); transform: scaleX(0); transition: transform 0.4s ease; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: rgba(201,168,76,0.04); }
+  .service-icon { font-size: 28px; margin-bottom: 28px; display: block; }
+  .service-name { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
+  .service-desc { font-size: 13px; line-height: 1.9; color: var(--white-dim); }
+
+  /* FLEET */
+  #fleet { padding: 120px 60px; background: var(--black-soft); }
+  .fleet-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .car-card { position: relative; background: var(--black-card); border: 1px solid rgba(201,168,76,0.1); overflow: hidden; transition: border-color 0.4s; }
+  .car-card:hover { border-color: rgba(201,168,76,0.4); }
+  .car-badge { position: absolute; top: 24px; left: 24px; background: linear-gradient(135deg, var(--gold), var(--gold-dim)); color: var(--black); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 14px; z-index: 2; }
+  .car-image-wrap { height: 260px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); display: flex; align-items: center; justify-content: center; position: relative; }
+  .car-image-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--black-card) 0%, transparent 50%); }
+  .car-emoji { font-size: 80px; opacity: 0.7; }
+  .car-info { padding: 32px 36px 40px; }
+  .car-name { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 0.08em; margin-bottom: 8px; }
+  .car-class { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+  .car-desc { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.7; color: var(--white-dim); margin-bottom: 24px; }
+  .car-specs { display: flex; gap: 20px; flex-wrap: wrap; }
+  .spec { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.15em; color: var(--white-dim); text-transform: uppercase; }
+  .spec::before { content: '◆'; font-size: 6px; color: var(--gold); }
+
+  /* ADVANTAGES */
+  #advantages { padding: 120px 60px; background: var(--black); position: relative; }
+  #advantages::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%); }
+  .adv-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .adv-item { text-align: center; padding: 48px 24px; border: 1px solid rgba(201,168,76,0.08); background: rgba(201,168,76,0.02); transition: all 0.4s; }
+  .adv-item:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); transform: translateY(-4px); }
+  .adv-icon { font-size: 36px; margin-bottom: 24px; display: block; }
+  .adv-title { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
+  .adv-text { font-size: 13px; line-height: 1.8; color: var(--white-dim); }
+
+  /* QUOTE */
+  #quote { padding: 100px 60px; background: var(--black-soft); text-align: center; }
+  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 120px; color: var(--gold); opacity: 0.15; line-height: 1; margin-bottom: -40px; display: block; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 36px); font-style: italic; font-weight: 300; color: var(--white); max-width: 800px; margin: 0 auto 40px; line-height: 1.5; }
+  .quote-author { font-size: 11px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; }
+
+  /* CONTACT */
+  #contact { padding: 120px 60px; background: var(--black); }
+  .contact-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info h3 { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 36px; }
+  .contact-item { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(201,168,76,0.08); }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-label { font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dim); text-transform: uppercase; }
+  .contact-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--white); }
+  .contact-value a { color: var(--white); text-decoration: none; transition: color 0.3s; }
+  .contact-value a:hover { color: var(--gold); }
+  .contact-channels { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .ch-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border: 1px solid rgba(201,168,76,0.2); color: var(--white-dim); text-decoration: none; font-size: 11px; letter-spacing: 0.08em; transition: all 0.3s; font-family: 'Montserrat', sans-serif; cursor: none; }
+  .ch-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+  .contact-form { display: flex; flex-direction: column; gap: 18px; }
+  .contact-form h3 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; }
+  .form-field label { font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dim); text-transform: uppercase; }
+  .form-field input, .form-field textarea, .form-field select { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2); color: var(--white); padding: 14px 16px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300; outline: none; transition: border-color 0.3s; resize: none; }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--gold); }
+  .form-field select option { background: #111; }
+  .btn-submit { padding: 16px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; cursor: none; transition: all 0.4s; position: relative; overflow: hidden; }
+  .btn-submit::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; z-index: -1; }
+  .btn-submit:hover { color: var(--black); }
+  .btn-submit:hover::before { transform: scaleX(1); }
+
+  /* FOOTER */
+  footer { background: rgba(0,0,0,0.8); border-top: 1px solid rgba(201,168,76,0.1); padding: 48px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-brand { font-family: 'Cinzel', serif; font-size: 18px; color: var(--gold); letter-spacing: 0.2em; }
+  .footer-brand span { display: block; font-size: 9px; letter-spacing: 0.5em; color: var(--white-dim); font-family: 'Montserrat', sans-serif; font-weight: 300; margin-top: 4px; }
+  .footer-copy { font-size: 11px; color: var(--white-dim); letter-spacing: 0.1em; }
+  .footer-social { display: flex; gap: 20px; }
+  .footer-social a { font-size: 11px; letter-spacing: 0.2em; color: var(--white-dim); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+  .footer-social a:hover { color: var(--gold); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollAnim { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 20px; } nav.scrolled { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .contact-strip, #about, #services, #fleet, #advantages, #contact, #quote { padding: 80px 20px; }
+    .contact-strip { padding: 16px 20px; }
+    .about-grid, .fleet-grid, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .adv-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 20px; }
+    body { cursor: auto; } .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">CIORNII <span>Executive Transfer</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#fleet" data-i18n="nav_fleet">Fleet</a></li>
+      <li><a href="#advantages" data-i18n="nav_why">Why Us</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('ro')">RO</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <p class="hero-pre" data-i18n="hero_location">Chișinău, Moldova</p>
+    <h1 class="hero-title">CIORNII</h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Executive Transfer</p>
+    <p class="hero-tagline" data-i18n="hero_tagline">Status, punctuality and confidentiality in every situation.</p>
+    <div class="hero-buttons">
+      <a href="tel:+37360623111" class="btn-gold" data-i18n="hero_btn_call">📞 Call Now</a>
+      <a href="#contact" class="btn-outline" data-i18n="hero_btn_book">Book Transfer</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span data-i18n="scroll">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <a href="tel:+37360623111" class="cta-btn highlight">📞 +373 60 623 111</a>
+  <a href="https://wa.me/37360623111" class="cta-btn" target="_blank">💬 WhatsApp</a>
+  <a href="https://t.me/+37360623111" class="cta-btn" target="_blank">✈️ Telegram</a>
+  <a href="viber://chat?number=37360623111" class="cta-btn" target="_blank">📱 Viber</a>
+  <a href="mailto:executivetransfer2026@outlook.com" class="cta-btn">✉️ Email</a>
+  <a href="https://instagram.com/exec.transfer" class="cta-btn" target="_blank">📸 Instagram</a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-header" style="text-align:left; margin-bottom:40px;">
+        <span class="section-eyebrow" data-i18n="about_eyebrow">About the company</span>
+        <h2 class="section-title" data-i18n="about_title">Premium Executive<br>Transportation</h2>
+        <div class="section-rule" style="margin-left:0;"></div>
+      </div>
+      <p data-i18n="about_p1">CIORNII Executive Transfer is a <strong>premium transportation service</strong> in Chișinău, catering to business clients, hotels, and private VIP passengers.</p>
+      <p data-i18n="about_p2">We provide a <strong>personal driver, delegation services</strong>, and full client support with a focus on safety and the highest level of service.</p>
+      <p data-i18n="about_p3">Every journey with us is an experience — not just a ride. <strong>Discretion, elegance, and absolute reliability</strong> define who we are.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-label" data-i18n="stat_avail">Availability</span></div>
+      <div class="stat"><span class="stat-num">VIP</span><span class="stat-label" data-i18n="stat_focus">Client Focus</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-i18n="stat_conf">Confidential</span></div>
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label" data-i18n="stat_cars">Premium Vehicles</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <span class="section-eyebrow" data-i18n="srv_eyebrow">What we offer</span>
+    <h2 class="section-title" data-i18n="srv_title">Our Services</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><span class="service-icon">✈️</span><div class="service-name" data-i18n="s1_name">VIP Airport & City Transfers</div><p class="service-desc" data-i18n="s1_desc">Seamless door-to-door transfers between Chișinău International Airport and any destination. Meet & greet, luggage assistance, and flight monitoring included.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🌍</span><div class="service-name" data-i18n="s2_name">International Travel</div><p class="service-desc" data-i18n="s2_desc">Organizing trips around the world with full support, route planning, and ground transportation coordination across borders.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🚗</span><div class="service-name" data-i18n="s3_name">Personal Driver 24/7</div><p class="service-desc" data-i18n="s3_desc">Dedicated personal driver available around the clock for executives, diplomats, and private clients. Discretion is our standard.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🤝</span><div class="service-name" data-i18n="s4_name">Assistant & Concierge</div><p class="service-desc" data-i18n="s4_desc">Beyond transportation: restaurant reservations, hotel coordination, event logistics — a full concierge experience tailored to your needs.</p></div>
+    <div class="service-card reveal"><span class="service-icon">💼</span><div class="service-name" data-i18n="s5_name">Business Meeting Escort</div><p class="service-desc" data-i18n="s5_desc">Professional escort services for delegations, corporate events, and high-level business meetings throughout Moldova and internationally.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🏛️</span><div class="service-name" data-i18n="s6_name">Official Events & Visits</div><p class="service-desc" data-i18n="s6_desc">Reliable transportation for state visits, diplomatic events, official ceremonies, and VIP protocol services at the highest standard.</p></div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet">
+  <div class="section-header reveal">
+    <span class="section-eyebrow" data-i18n="fleet_eyebrow">Our vehicles</span>
+    <h2 class="section-title" data-i18n="fleet_title">The Fleet</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="fleet-grid">
+    <div class="car-card reveal">
+      <div class="car-badge" data-i18n="car1_badge">Business Sedan · Up to 2 Passengers</div>
+      <div class="car-image-wrap"><span class="car-emoji">🚗</span></div>
+      <div class="car-info">
+        <h3 class="car-name">Mercedes-AMG E-Class</h3>
+        <p class="car-class" data-i18n="car1_class">W212 AMG · Executive Sedan</p>
+        <p class="car-desc" data-i18n="car1_desc">A premium sports car with a powerful engine and distinctive character. The aesthetics and prestige of the AMG brand. High dynamics and precise steering — the perfect choice for stylish business travel. Comfort and safety without compromise.</p>
+        <div class="car-specs"><span class="spec" data-i18n="spec1a">Executive Class</span><span class="spec" data-i18n="spec1b">AMG Package</span><span class="spec" data-i18n="spec1c">Private Clients</span></div>
+      </div>
+    </div>
+    <div class="car-card reveal">
+      <div class="car-badge" data-i18n="car2_badge">VIP Comfort Van · Up to 5 Passengers</div>
+      <div class="car-image-wrap"><span class="car-emoji">🚐</span></div>
+      <div class="car-info">
+        <h3 class="car-name">Maxus MIFA 9</h3>
+        <p class="car-class" data-i18n="car2_class">Electric Minivan · Business/Premium</p>
+        <p class="car-desc" data-i18n="car2_desc">A modern electric minivan for comfortable group transfers. Spacious cabin for up to 5 passengers. Eco-friendly, silent electric drive. High level of security and multimedia. Ideal for business delegations and family trips alike.</p>
+        <div class="car-specs"><span class="spec" data-i18n="spec2a">Electric Drive</span><span class="spec" data-i18n="spec2b">Up to 5 Pax</span><span class="spec" data-i18n="spec2c">Premium Class</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="advantages">
+  <div class="section-header reveal">
+    <span class="section-eyebrow" data-i18n="adv_eyebrow">Why choose us</span>
+    <h2 class="section-title" data-i18n="adv_title">Our Standards</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="adv-grid">
+    <div class="adv-item reveal"><span class="adv-icon">⏱️</span><div class="adv-title" data-i18n="a1_title">Strict Punctuality</div><p class="adv-text" data-i18n="a1_text">Absolute discipline and time precision. Your schedule is sacred — we are always on time, every time.</p></div>
+    <div class="adv-item reveal"><span class="adv-icon">🔒</span><div class="adv-title" data-i18n="a2_title">Full Confidentiality</div><p class="adv-text" data-i18n="a2_text">Complete discretion guaranteed. All journeys, conversations, and client information remain strictly private.</p></div>
+    <div class="adv-item reveal"><span class="adv-icon">🛡️</span><div class="adv-title" data-i18n="a3_title">Security Expertise</div><p class="adv-text" data-i18n="a3_text">Proven experience in the security field. Our drivers are trained for executive protection protocols.</p></div>
+    <div class="adv-item reveal"><span class="adv-icon">👔</span><div class="adv-title" data-i18n="a4_title">Premium Appearance</div><p class="adv-text" data-i18n="a4_text">Business dress code and impeccable presentation. We represent you before you even speak.</p></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <span class="quote-mark">"</span>
+  <p class="quote-text reveal" data-i18n="quote_text">CIORNII Executive Transfer — a level of service that builds a reputation.</p>
+  <span class="quote-author reveal" data-i18n="quote_author">Our Promise to Every Client</span>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-eyebrow" data-i18n="ct_eyebrow">Get in touch</span>
+    <h2 class="section-title" data-i18n="ct_title">Book Your Transfer</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <h3 data-i18n="ct_info_title">Contact Information</h3>
+      <div class="contact-item">
+        <span class="contact-label" data-i18n="ct_phone_label">Phone / WhatsApp / Telegram / Viber</span>
+        <span class="contact-value"><a href="tel:+37360623111">+373 60 623 111</a></span>
+        <div class="contact-channels">
+          <a href="tel:+37360623111" class="ch-btn">📞 <span data-i18n="ch_call">Call</span></a>
+          <a href="https://wa.me/37360623111" class="ch-btn" target="_blank">💬 WhatsApp</a>
+          <a href="https://t.me/+37360623111" class="ch-btn" target="_blank">✈️ Telegram</a>
+          <a href="viber://chat?number=37360623111" class="ch-btn" target="_blank">📱 Viber</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value"><a href="mailto:executivetransfer2026@outlook.com">executivetransfer2026@outlook.com</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label" data-i18n="ct_loc_label">Location</span>
+        <span class="contact-value">Chișinău, Moldova</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label" data-i18n="ct_social_label">Social Media</span>
+        <span class="contact-value">
+          <a href="https://instagram.com/exec.transfer" target="_blank">@exec.transfer</a> &nbsp;·&nbsp;
+          <a href="#" target="_blank">Piotr Ciornii</a>
+        </span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label" data-i18n="ct_avail_label">Availability</span>
+        <span class="contact-value">24 / 7 · 365 <span data-i18n="ct_days">days</span></span>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <h3 data-i18n="form_title">Send a Request</h3>
+      <div class="form-field"><label data-i18n="form_name">Full Name</label><input type="text" data-i18n-ph="form_name_ph" placeholder="Your name"></div>
+      <div class="form-field"><label data-i18n="form_phone">Phone or Email</label><input type="text" placeholder="+373 ..."></div>
+      <div class="form-field">
+        <label data-i18n="form_service">Service Type</label>
+        <select>
+          <option value="" disabled selected data-i18n="form_select">Select a service</option>
+          <option data-i18n="f_s1">VIP Airport Transfer</option>
+          <option data-i18n="f_s2">Personal Driver 24/7</option>
+          <option data-i18n="f_s3">Business Meeting Escort</option>
+          <option data-i18n="f_s4">International Travel</option>
+          <option data-i18n="f_s5">Official Event Service</option>
+          <option data-i18n="f_s6">Other</option>
+        </select>
+      </div>
+      <div class="form-field"><label data-i18n="form_msg">Message</label><textarea rows="4" data-i18n-ph="form_msg_ph" placeholder="Date, time, destination..."></textarea></div>
+      <button class="btn-submit" id="submitBtn" onclick="handleSubmit()" data-i18n="form_submit">Send Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">CIORNII <span>Executive Transfer</span></div>
+  <p class="footer-copy">© 2026 CIORNII Executive Transfer · Chișinău, Moldova</p>
+  <div class="footer-social">
+    <a href="#" target="_blank">TikTok</a>
+    <a href="https://instagram.com/exec.transfer" target="_blank">Instagram</a>
+    <a href="#" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en: {
+    nav_about:'About', nav_services:'Services', nav_fleet:'Fleet', nav_why:'Why Us', nav_contact:'Contact',
+    hero_location:'Chișinău, Moldova', hero_subtitle:'Executive Transfer',
+    hero_tagline:'Status, punctuality and confidentiality in every situation.',
+    hero_btn_call:'📞 Call Now', hero_btn_book:'Book Transfer', scroll:'Scroll',
+    about_eyebrow:'About the company', about_title:'Premium Executive<br>Transportation',
+    about_p1:'CIORNII Executive Transfer is a <strong>premium transportation service</strong> in Chișinău, catering to business clients, hotels, and private VIP passengers.',
+    about_p2:'We provide a <strong>personal driver, delegation services</strong>, and full client support with a focus on safety and the highest level of service.',
+    about_p3:'Every journey with us is an experience — not just a ride. <strong>Discretion, elegance, and absolute reliability</strong> define who we are.',
+    stat_avail:'Availability', stat_focus:'Client Focus', stat_conf:'Confidential', stat_cars:'Premium Vehicles',
+    srv_eyebrow:'What we offer', srv_title:'Our Services',
+    s1_name:'VIP Airport & City Transfers', s1_desc:'Seamless door-to-door transfers between Chișinău International Airport and any destination. Meet & greet, luggage assistance, and flight monitoring included.',
+    s2_name:'International Travel', s2_desc:'Organizing trips around the world with full support, route planning, and ground transportation coordination across borders.',
+    s3_name:'Personal Driver 24/7', s3_desc:'Dedicated personal driver available around the clock for executives, diplomats, and private clients. Discretion is our standard.',
+    s4_name:'Assistant & Concierge', s4_desc:'Beyond transportation: restaurant reservations, hotel coordination, event logistics — a full concierge experience tailored to your needs.',
+    s5_name:'Business Meeting Escort', s5_desc:'Professional escort services for delegations, corporate events, and high-level business meetings throughout Moldova and internationally.',
+    s6_name:'Official Events & Visits', s6_desc:'Reliable transportation for state visits, diplomatic events, official ceremonies, and VIP protocol services at the highest standard.',
+    fleet_eyebrow:'Our vehicles', fleet_title:'The Fleet',
+    car1_badge:'Business Sedan · Up to 2 Passengers', car1_class:'W212 AMG · Executive Sedan',
+    car1_desc:'A premium sports car with a powerful engine and distinctive character. The aesthetics and prestige of the AMG brand. High dynamics and precise steering — the perfect choice for stylish business travel. Comfort and safety without compromise.',
+    spec1a:'Executive Class', spec1b:'AMG Package', spec1c:'Private Clients',
+    car2_badge:'VIP Comfort Van · Up to 5 Passengers', car2_class:'Electric Minivan · Business/Premium',
+    car2_desc:'A modern electric minivan for comfortable group transfers. Spacious cabin for up to 5 passengers. Eco-friendly, silent electric drive. High level of security and multimedia. Ideal for business delegations and family trips alike.',
+    spec2a:'Electric Drive', spec2b:'Up to 5 Pax', spec2c:'Premium Class',
+    adv_eyebrow:'Why choose us', adv_title:'Our Standards',
+    a1_title:'Strict Punctuality', a1_text:'Absolute discipline and time precision. Your schedule is sacred — we are always on time, every time.',
+    a2_title:'Full Confidentiality', a2_text:'Complete discretion guaranteed. All journeys, conversations, and client information remain strictly private.',
+    a3_title:'Security Expertise', a3_text:'Proven experience in the security field. Our drivers are trained for executive protection protocols.',
+    a4_title:'Premium Appearance', a4_text:'Business dress code and impeccable presentation. We represent you before you even speak.',
+    quote_text:'CIORNII Executive Transfer — a level of service that builds a reputation.',
+    quote_author:'Our Promise to Every Client',
+    ct_eyebrow:'Get in touch', ct_title:'Book Your Transfer',
+    ct_info_title:'Contact Information', ct_phone_label:'Phone / WhatsApp / Telegram / Viber',
+    ch_call:'Call', ct_loc_label:'Location', ct_social_label:'Social Media', ct_avail_label:'Availability', ct_days:'days',
+    form_title:'Send a Request', form_name:'Full Name', form_name_ph:'Your name', form_phone:'Phone or Email',
+    form_service:'Service Type', form_select:'Select a service', form_msg:'Message', form_msg_ph:'Date, time, destination...',
+    form_submit:'Send Request', form_sent:'Request Sent ✓',
+    f_s1:'VIP Airport Transfer', f_s2:'Personal Driver 24/7', f_s3:'Business Meeting Escort', f_s4:'International Travel', f_s5:'Official Event Service', f_s6:'Other'
+  },
+  ru: {
+    nav_about:'О нас', nav_services:'Услуги', nav_fleet:'Автопарк', nav_why:'Преимущества', nav_contact:'Контакты',
+    hero_location:'Кишинёв, Молдова', hero_subtitle:'Executive Transfer',
+    hero_tagline:'Статус, пунктуальность и конфиденциальность в каждой ситуации.',
+    hero_btn_call:'📞 Позвонить', hero_btn_book:'Заказать трансфер', scroll:'Прокрутить',
+    about_eyebrow:'О компании', about_title:'Премиальный<br>VIP-Трансфер',
+    about_p1:'CIORNII Executive Transfer — <strong>премиальный транспортный сервис</strong> в Кишинёве, ориентированный на бизнес-клиентов, отели и частных VIP-пассажиров.',
+    about_p2:'Мы предоставляем <strong>персонального водителя, услуги делегаций</strong> и полное сопровождение клиентов с акцентом на безопасность и высокий уровень сервиса.',
+    about_p3:'Каждая поездка с нами — это опыт. <strong>Конфиденциальность, элегантность и абсолютная надёжность</strong> — наши принципы.',
+    stat_avail:'Доступность', stat_focus:'VIP-клиенты', stat_conf:'Конфиденциально', stat_cars:'Премиум авто',
+    srv_eyebrow:'Что мы предлагаем', srv_title:'Наши услуги',
+    s1_name:'VIP трансфер аэропорт / город', s1_desc:'Трансферы от двери до двери между аэропортом Кишинёва и любым пунктом назначения. Встреча, помощь с багажом и мониторинг рейсов включены.',
+    s2_name:'Международные поездки', s2_desc:'Организация поездок по всему миру с полным сопровождением, планированием маршрутов и координацией наземного транспорта.',
+    s3_name:'Персональный водитель 24/7', s3_desc:'Выделенный персональный водитель для руководителей, дипломатов и частных клиентов. Конфиденциальность — наш стандарт.',
+    s4_name:'Ассистент и консьерж', s4_desc:'Помимо транспорта: бронирование ресторанов, координация с отелями, логистика мероприятий — полный консьерж-сервис.',
+    s5_name:'Сопровождение деловых встреч', s5_desc:'Профессиональное сопровождение делегаций, корпоративных мероприятий и деловых встреч высокого уровня по всей Молдове и за рубежом.',
+    s6_name:'Официальные мероприятия', s6_desc:'Надёжный транспорт для государственных визитов, дипломатических мероприятий, официальных церемоний и VIP-протокольных услуг.',
+    fleet_eyebrow:'Наши автомобили', fleet_title:'Автопарк',
+    car1_badge:'Бизнес-седан · До 2 пассажиров', car1_class:'W212 AMG · Представительский седан',
+    car1_desc:'Премиальный спортивный автомобиль с мощным двигателем. Эстетика и престиж бренда AMG. Высокая динамика и точное рулевое управление — идеальный выбор для деловых поездок. Комфорт и безопасность без компромиссов.',
+    spec1a:'Бизнес-класс', spec1b:'Пакет AMG', spec1c:'Частные клиенты',
+    car2_badge:'VIP-минивэн · До 5 пассажиров', car2_class:'Электрический минивэн · Бизнес/Премиум',
+    car2_desc:'Современный электрический минивэн для комфортных групповых трансферов. Просторный салон — до 5 пассажиров. Экологичный, бесшумный электропривод. Высокий уровень безопасности и мультимедиа.',
+    spec2a:'Электропривод', spec2b:'До 5 чел.', spec2c:'Премиум-класс',
+    adv_eyebrow:'Почему выбирают нас', adv_title:'Наши стандарты',
+    a1_title:'Строгая пунктуальность', a1_text:'Абсолютная дисциплина и точность. Ваш график — наш приоритет. Всегда вовремя.',
+    a2_title:'Полная конфиденциальность', a2_text:'Гарантированная конфиденциальность. Все данные клиентов строго защищены.',
+    a3_title:'Опыт в сфере безопасности', a3_text:'Проверенный опыт в сфере безопасности. Наши водители обучены протоколам защиты.',
+    a4_title:'Премиальный внешний вид', a4_text:'Деловой дресс-код и безупречный внешний вид. Мы представляем вас ещё до первого слова.',
+    quote_text:'CIORNII Executive Transfer — уровень сервиса, который формирует репутацию.',
+    quote_author:'Наше обещание каждому клиенту',
+    ct_eyebrow:'Свяжитесь с нами', ct_title:'Заказать трансфер',
+    ct_info_title:'Контактная информация', ct_phone_label:'Телефон / WhatsApp / Telegram / Viber',
+    ch_call:'Позвонить', ct_loc_label:'Местоположение', ct_social_label:'Социальные сети', ct_avail_label:'Доступность', ct_days:'дней',
+    form_title:'Отправить заявку', form_name:'Полное имя', form_name_ph:'Ваше имя', form_phone:'Телефон или Email',
+    form_service:'Тип услуги', form_select:'Выберите услугу', form_msg:'Сообщение', form_msg_ph:'Дата, время, маршрут...',
+    form_submit:'Отправить заявку', form_sent:'Заявка отправлена ✓',
+    f_s1:'VIP трансфер в аэропорт', f_s2:'Персональный водитель 24/7', f_s3:'Сопровождение деловых встреч', f_s4:'Международные поездки', f_s5:'Официальные мероприятия', f_s6:'Другое'
+  },
+  ro: {
+    nav_about:'Despre', nav_services:'Servicii', nav_fleet:'Flotă', nav_why:'De ce noi', nav_contact:'Contact',
+    hero_location:'Chișinău, Moldova', hero_subtitle:'Executive Transfer',
+    hero_tagline:'Statut, punctualitate și confidențialitate în orice situație.',
+    hero_btn_call:'📞 Sună acum', hero_btn_book:'Rezervă transfer', scroll:'Defilează',
+    about_eyebrow:'Despre companie', about_title:'Transport Executiv<br>Premium',
+    about_p1:'CIORNII Executive Transfer este un <strong>serviciu premium de transport</strong> în Chișinău, dedicat clienților de afaceri, hotelurilor și pasagerilor VIP privați.',
+    about_p2:'Oferim <strong>șofer personal, servicii de delegație</strong> și suport complet pentru clienți, cu accent pe siguranță și servicii de înaltă calitate.',
+    about_p3:'Fiecare călătorie cu noi este o experiență. <strong>Discreție, eleganță și fiabilitate absolută</strong> — valorile noastre.',
+    stat_avail:'Disponibilitate', stat_focus:'Clienți VIP', stat_conf:'Confidențial', stat_cars:'Vehicule premium',
+    srv_eyebrow:'Ce oferim', srv_title:'Serviciile noastre',
+    s1_name:'Transfer VIP aeroport / oraș', s1_desc:'Transferuri ușă-ușă între Aeroportul Internațional Chișinău și orice destinație. Întâmpinare, asistență bagaje și monitorizare zbor incluse.',
+    s2_name:'Călătorii internaționale', s2_desc:'Organizarea călătoriilor în toată lumea cu suport complet, planificarea rutelor și coordonarea transportului terestru.',
+    s3_name:'Șofer personal 24/7', s3_desc:'Șofer personal dedicat disponibil non-stop pentru executivi, diplomați și clienți privați. Discreția este standardul nostru.',
+    s4_name:'Asistent și concierge', s4_desc:'Dincolo de transport: rezervări restaurante, coordonare hoteluri, logistică evenimente — o experiență completă de concierge.',
+    s5_name:'Însoțirea întâlnirilor de afaceri', s5_desc:'Servicii profesionale de escortă pentru delegații, evenimente corporative și întâlniri de afaceri de înalt nivel.',
+    s6_name:'Evenimente și vizite oficiale', s6_desc:'Transport fiabil pentru vizite de stat, evenimente diplomatice, ceremonii oficiale și servicii de protocol VIP.',
+    fleet_eyebrow:'Vehiculele noastre', fleet_title:'Flota',
+    car1_badge:'Sedan Business · Până la 2 pasageri', car1_class:'W212 AMG · Sedan Executiv',
+    car1_desc:'Automobil sport premium cu motor puternic. Estetica și prestigiul mărcii AMG. Dinamică ridicată și direcție precisă — alegerea perfectă pentru călătorii de afaceri elegante. Confort și siguranță fără compromisuri.',
+    spec1a:'Clasă executivă', spec1b:'Pachet AMG', spec1c:'Clienți privați',
+    car2_badge:'VIP Comfort Van · Până la 5 pasageri', car2_class:'Minivan Electric · Business/Premium',
+    car2_desc:'Minivan electric modern pentru transferuri de grup confortabile. Salon spațios — până la 5 pasageri. Propulsie electrică ecologică și silențioasă. Nivel ridicat de securitate și multimedia.',
+    spec2a:'Propulsie electrică', spec2b:'Până la 5 pers.', spec2c:'Clasă premium',
+    adv_eyebrow:'De ce să ne alegeți', adv_title:'Standardele noastre',
+    a1_title:'Punctualitate strictă', a1_text:'Disciplină absolută și precizie temporală. Programul dvs. este sacru — suntem mereu la timp.',
+    a2_title:'Confidențialitate deplină', a2_text:'Discreție completă garantată. Toate datele clienților rămân strict private.',
+    a3_title:'Expertiză în securitate', a3_text:'Experiență dovedită în domeniul securității. Șoferii noștri sunt pregătiți pentru protocoale de protecție.',
+    a4_title:'Aspect premium', a4_text:'Cod vestimentar business și prezentare impecabilă. Vă reprezentăm înainte să spuneți un cuvânt.',
+    quote_text:'CIORNII Executive Transfer — un nivel de servicii care construiește o reputație.',
+    quote_author:'Promisiunea noastră fiecărui client',
+    ct_eyebrow:'Contactați-ne', ct_title:'Rezervați transferul',
+    ct_info_title:'Informații de contact', ct_phone_label:'Telefon / WhatsApp / Telegram / Viber',
+    ch_call:'Sună', ct_loc_label:'Locație', ct_social_label:'Rețele sociale', ct_avail_label:'Disponibilitate', ct_days:'zile',
+    form_title:'Trimite o cerere', form_name:'Nume complet', form_name_ph:'Numele dvs.', form_phone:'Telefon sau Email',
+    form_service:'Tip serviciu', form_select:'Selectați un serviciu', form_msg:'Mesaj', form_msg_ph:'Data, ora, destinație...',
+    form_submit:'Trimite cererea', form_sent:'Cerere trimisă ✓',
+    f_s1:'Transfer VIP aeroport', f_s2:'Șofer personal 24/7', f_s3:'Însoțire întâlniri de afaceri', f_s4:'Călătorii internaționale', f_s5:'Servicii evenimente oficiale', f_s6:'Altele'
+  }
+};
+
+let lang = 'en';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === l));
+  const t = T[l];
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (t[k] !== undefined) el.innerHTML = t[k]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const k = el.getAttribute('data-i18n-ph'); if (t[k] !== undefined) el.placeholder = t[k]; });
+  const sb = document.getElementById('submitBtn');
+  if (sb && !sb.getAttribute('data-sent')) sb.textContent = t.form_submit;
+}
+
+// Cursor
+const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX-4+'px'; cur.style.top = e.clientY-4+'px'; ring.style.left = e.clientX-16+'px'; ring.style.top = e.clientY-16+'px'; });
+
+// Navbar
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+// Reveal
+const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*80); }), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Submit
+function handleSubmit() {
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = T[lang].form_sent;
+  btn.setAttribute('data-sent','1');
+  setTimeout(()=>{ btn.textContent = T[lang].form_submit; btn.removeAttribute('data-sent'); }, 3000);
+}
+</script>
+</body>
+</html>
