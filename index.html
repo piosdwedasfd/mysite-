@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIORNII Executive Transfer — Chișinău, Moldova</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A84C; --gold-light: #E8C97A; --gold-dim: #8a6f30;
@@ -70,12 +70,22 @@
   /* ABOUT */
   #about { padding: 120px 60px; background: var(--black-soft); }
   .about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  /* ===== KEY CHANGE: About section title uses Montserrat bold (like screenshot 2) ===== */
+  .about-text .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
   .about-text p { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.8; color: var(--white-dim); margin-bottom: 24px; }
   .about-text p strong { color: var(--gold); font-weight: 400; }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.15); }
   .stat { padding: 40px 32px; background: var(--black-card); text-align: center; transition: background 0.3s; }
   .stat:hover { background: rgba(201,168,76,0.05); }
-  .stat-num { font-family: 'Cinzel', serif; font-size: 42px; color: var(--gold); display: block; margin-bottom: 8px; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; font-style: italic; color: var(--gold); display: block; margin-bottom: 8px; letter-spacing: 0.05em; }
   .stat-label { font-size: 10px; letter-spacing: 0.3em; color: var(--white-dim); text-transform: uppercase; }
 
   /* SERVICES */
@@ -192,9 +202,9 @@
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ro')">RO</button>
       <button class="lang-btn" onclick="setLang('ru')">RU</button>
-      <button class="lang-btn" onclick="setLang('ro')">RO</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
   </div>
 </nav>
@@ -225,7 +235,7 @@
   <a href="https://wa.me/37360623111" class="cta-btn" target="_blank">💬 WhatsApp</a>
   <a href="https://t.me/+37360623111" class="cta-btn" target="_blank">✈️ Telegram</a>
   <a href="viber://chat?number=37360623111" class="cta-btn" target="_blank">📱 Viber</a>
-  <a href="mailto:executivetransfer2026@outlook.com" class="cta-btn">✉️ Email</a>
+  <a href="/cdn-cgi/l/email-protection#0c6974696f7978657a69787e6d627f6a697e3e3c3e3a4c63797860636367226f6361" class="cta-btn">✉️ Email</a>
   <a href="https://instagram.com/exec.transfer" class="cta-btn" target="_blank">📸 Instagram</a>
 </div>
 
@@ -343,7 +353,7 @@
       </div>
       <div class="contact-item">
         <span class="contact-label">Email</span>
-        <span class="contact-value"><a href="mailto:executivetransfer2026@outlook.com">executivetransfer2026@outlook.com</a></span>
+        <span class="contact-value"><a href="/cdn-cgi/l/email-protection#1b7e637e786e6f726d7e6f697a75687d7e69292b292d5b746e6f7774747035787476"><span class="__cf_email__" data-cfemail="12776a777167667b64776660737c6174776020222024527d67667e7d7d793c717d7f">[email&#160;protected]</span></a></span>
       </div>
       <div class="contact-item">
         <span class="contact-label" data-i18n="ct_loc_label">Location</span>
@@ -358,7 +368,7 @@
       </div>
       <div class="contact-item">
         <span class="contact-label" data-i18n="ct_avail_label">Availability</span>
-        <span class="contact-value">24 / 7 · 365 <span data-i18n="ct_days">days</span></span>
+        <span class="contact-value" style="font-family:'Montserrat',sans-serif; font-weight:600; letter-spacing:0.15em; font-size:15px;">24 / 7 · 365 <span data-i18n="ct_days">days</span></span>
       </div>
     </div>
     <div class="contact-form reveal">
@@ -394,7 +404,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const T = {
   en: {
     nav_about:'About', nav_services:'Services', nav_fleet:'Fleet', nav_why:'Why Us', nav_contact:'Contact',
@@ -475,10 +485,10 @@ const T = {
     f_s1:'VIP трансфер в аэропорт', f_s2:'Персональный водитель 24/7', f_s3:'Сопровождение деловых встреч', f_s4:'Международные поездки', f_s5:'Официальные мероприятия', f_s6:'Другое'
   },
   ro: {
-    nav_about:'Despre', nav_services:'Servicii', nav_fleet:'Flotă', nav_why:'De ce noi', nav_contact:'Contact',
+    nav_about:'Despre', nav_services:'Servicii', nav_fleet:'Parcul Auto', nav_why:'De ce noi', nav_contact:'Contact',
     hero_location:'Chișinău, Moldova', hero_subtitle:'Executive Transfer',
     hero_tagline:'Statut, punctualitate și confidențialitate în orice situație.',
-    hero_btn_call:'📞 Sună acum', hero_btn_book:'Rezervă transfer', scroll:'Defilează',
+    hero_btn_call:'📞 Sună acum', hero_btn_book:'Rezervă transfer', scroll:'Derulează',
     about_eyebrow:'Despre companie', about_title:'Transport Executiv<br>Premium',
     about_p1:'CIORNII Executive Transfer este un <strong>serviciu premium de transport</strong> în Chișinău, dedicat clienților de afaceri, hotelurilor și pasagerilor VIP privați.',
     about_p2:'Oferim <strong>șofer personal, servicii de delegație</strong> și suport complet pentru clienți, cu accent pe siguranță și servicii de înaltă calitate.',
@@ -491,7 +501,7 @@ const T = {
     s4_name:'Asistent și concierge', s4_desc:'Dincolo de transport: rezervări restaurante, coordonare hoteluri, logistică evenimente — o experiență completă de concierge.',
     s5_name:'Însoțirea întâlnirilor de afaceri', s5_desc:'Servicii profesionale de escortă pentru delegații, evenimente corporative și întâlniri de afaceri de înalt nivel.',
     s6_name:'Evenimente și vizite oficiale', s6_desc:'Transport fiabil pentru vizite de stat, evenimente diplomatice, ceremonii oficiale și servicii de protocol VIP.',
-    fleet_eyebrow:'Vehiculele noastre', fleet_title:'Flota',
+    fleet_eyebrow:'Vehiculele noastre', fleet_title:'Parcul Auto',
     car1_badge:'Sedan Business · Până la 2 pasageri', car1_class:'W212 AMG · Sedan Executiv',
     car1_desc:'Automobil sport premium cu motor puternic. Estetica și prestigiul mărcii AMG. Dinamică ridicată și direcție precisă — alegerea perfectă pentru călătorii de afaceri elegante. Confort și siguranță fără compromisuri.',
     spec1a:'Clasă executivă', spec1b:'Pachet AMG', spec1c:'Clienți privați',
@@ -515,7 +525,7 @@ const T = {
   }
 };
 
-let lang = 'en';
+let lang = 'ro';
 function setLang(l) {
   lang = l;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === l));
@@ -537,6 +547,9 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY
 // Reveal
 const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*80); }), {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Init language - Romanian first
+setLang('ro');
 
 // Submit
 function handleSubmit() {
